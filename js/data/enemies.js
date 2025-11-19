@@ -14,6 +14,9 @@ const ENEMY_DATA = {
     vampire: { name: 'Vampire', char: 'V', color: '#8b0000', hp: 45, attack: 12, defense: 5, xp: 50, speed: 105, behavior: 'melee', lifesteal: 0.3, biome: 'crypt' },
     lich: { name: 'Lich', char: 'L', color: '#9400d3', hp: 60, attack: 8, defense: 6, xp: 80, speed: 90, behavior: 'caster', spells: ['darkBolt', 'curse', 'summonUndead'], boss: false, biome: 'crypt' },
     mummy: { name: 'Mummy', char: 'm', color: '#f5deb3', hp: 40, attack: 8, defense: 7, xp: 35, speed: 70, behavior: 'melee', curse: true, biome: 'crypt' },
+    bonePile: { name: 'Bone Pile', char: 'p', color: '#f5f5dc', hp: 10, attack: 0, defense: 0, xp: 5, speed: 0, behavior: 'spawner', spawns: 'skeleton', biome: 'crypt' },
+    deathKnight: { name: 'Death Knight', char: 'K', color: '#1a1a1a', hp: 55, attack: 14, defense: 8, xp: 65, speed: 80, behavior: 'melee', lifesteal: 0.2, biome: 'crypt' },
+    crawlingClaw: { name: 'Crawling Claw', char: 'c', color: '#dcdcdc', hp: 8, attack: 4, defense: 1, xp: 6, speed: 110, behavior: 'melee', swarm: true, biome: 'crypt' },
 
     // ===== FIRE CAVERNS (Demons & Fire) =====
     imp: { name: 'Imp', char: 'i', color: '#ff4500', hp: 12, attack: 5, defense: 1, xp: 12, speed: 120, behavior: 'caster', spells: ['fireBolt'], biome: 'fire' },
@@ -25,6 +28,8 @@ const ENEMY_DATA = {
     magmaSlime: { name: 'Magma Slime', char: 'j', color: '#ff6600', hp: 20, attack: 6, defense: 2, xp: 15, speed: 70, behavior: 'melee', split: true, fireDamage: 3, biome: 'fire' },
     salamander: { name: 'Salamander', char: 'S', color: '#ff8c00', hp: 35, attack: 10, defense: 4, xp: 30, speed: 100, behavior: 'melee', fireImmune: true, biome: 'fire' },
     phoenixHatchling: { name: 'Phoenix Hatchling', char: 'p', color: '#ffd700', hp: 25, attack: 8, defense: 2, xp: 35, speed: 110, behavior: 'melee', resurrect: true, biome: 'fire' },
+    lavaBeast: { name: 'Lava Beast', char: 'L', color: '#ff3300', hp: 45, attack: 11, defense: 5, xp: 38, speed: 85, behavior: 'melee', fireImmune: true, lavaWalk: true, biome: 'fire' },
+    ashWraith: { name: 'Ash Wraith', char: 'a', color: '#4a4a4a', hp: 22, attack: 8, defense: 2, xp: 20, speed: 100, behavior: 'melee', phasing: true, fireDamage: 3, biome: 'fire' },
 
     // ===== FROZEN WASTES (Ice Creatures) =====
     iceSprite: { name: 'Ice Sprite', char: 'i', color: '#00ffff', hp: 10, attack: 4, defense: 1, xp: 10, speed: 125, behavior: 'caster', spells: ['frostBolt'], biome: 'ice' },
@@ -35,6 +40,8 @@ const ENEMY_DATA = {
     iceWyrm: { name: 'Ice Wyrm', char: 'D', color: '#e0ffff', hp: 55, attack: 12, defense: 6, xp: 50, speed: 95, behavior: 'ranged', breath: 'ice', biome: 'ice' },
     wendigo: { name: 'Wendigo', char: 'W', color: '#dcdcdc', hp: 45, attack: 13, defense: 4, xp: 55, speed: 105, behavior: 'melee', fear: true, biome: 'ice' },
     snowman: { name: 'Animated Snowman', char: 's', color: '#ffffff', hp: 15, attack: 5, defense: 2, xp: 12, speed: 85, behavior: 'melee', biome: 'ice' },
+    iceMephit: { name: 'Ice Mephit', char: 'm', color: '#b0e0e6', hp: 14, attack: 5, defense: 2, xp: 14, speed: 115, behavior: 'caster', spells: ['frostBolt'], biome: 'ice' },
+    polarBear: { name: 'Polar Bear', char: 'B', color: '#fffafa', hp: 40, attack: 11, defense: 5, xp: 32, speed: 90, behavior: 'melee', biome: 'ice' },
 
     // ===== OVERGROWN RUINS (Plants & Insects) =====
     giantSpider: { name: 'Giant Spider', char: 's', color: '#8b4513', hp: 18, attack: 6, defense: 2, xp: 15, speed: 105, behavior: 'melee', effect: 'poison', web: true, biome: 'ruins' },

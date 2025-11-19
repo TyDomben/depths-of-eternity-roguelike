@@ -278,6 +278,261 @@ const TRAP_TYPES = {
         damage: 0,
         effect: 'CONFUSION',
         message: 'Strange vapors cloud your mind!'
+    },
+
+    // Additional Trap Types
+    BEAR_TRAP: {
+        name: 'Bear Trap',
+        damage: 18,
+        damageType: 'physical',
+        effect: 'IMMOBILIZED',
+        message: 'A bear trap snaps shut on your leg!'
+    },
+    BLADE: {
+        name: 'Blade Trap',
+        damage: 22,
+        damageType: 'physical',
+        message: 'Razor-sharp blades swing from the wall!'
+    },
+    BOULDER: {
+        name: 'Boulder Trap',
+        damage: 30,
+        damageType: 'physical',
+        message: 'A boulder rolls towards you!'
+    },
+    ACID: {
+        name: 'Acid Trap',
+        damage: 15,
+        damageType: 'acid',
+        effect: 'CORRODED',
+        message: 'Acid sprays from hidden nozzles!'
+    },
+    FROST: {
+        name: 'Frost Trap',
+        damage: 12,
+        damageType: 'ice',
+        effect: 'SLOWED',
+        message: 'A blast of freezing air engulfs you!'
+    },
+    LIGHTNING: {
+        name: 'Lightning Trap',
+        damage: 25,
+        damageType: 'lightning',
+        effect: 'STUNNED',
+        message: 'Lightning arcs through your body!'
+    },
+    BLIND: {
+        name: 'Flash Trap',
+        damage: 0,
+        effect: 'BLIND',
+        message: 'A blinding flash of light!'
+    },
+    SLEEP: {
+        name: 'Sleep Gas Trap',
+        damage: 0,
+        effect: 'SLEEP',
+        message: 'Sleeping gas fills the air!'
+    },
+    WEAKNESS: {
+        name: 'Weakness Trap',
+        damage: 0,
+        effect: 'WEAKENED',
+        message: 'Your strength fades away!'
+    },
+    CURSE: {
+        name: 'Curse Trap',
+        damage: 0,
+        effect: 'CURSED',
+        message: 'Dark magic curses you!'
+    },
+    SUMMON: {
+        name: 'Summoning Trap',
+        damage: 0,
+        effect: 'summon',
+        message: 'Enemies are summoned around you!'
+    },
+    MANA_DRAIN: {
+        name: 'Mana Drain Trap',
+        damage: 0,
+        effect: 'drain_mana',
+        message: 'Your magical energy is drained!'
+    },
+    WEB: {
+        name: 'Web Trap',
+        damage: 0,
+        effect: 'WEBBED',
+        message: 'Sticky webs entangle you!'
+    },
+    EXPLOSION: {
+        name: 'Explosive Trap',
+        damage: 35,
+        damageType: 'fire',
+        aoe: true,
+        message: 'The floor explodes!'
+    },
+    CRUSHING_WALL: {
+        name: 'Crushing Wall',
+        damage: 40,
+        damageType: 'physical',
+        message: 'The walls close in!'
+    },
+    DART: {
+        name: 'Dart Trap',
+        damage: 8,
+        damageType: 'physical',
+        effect: 'POISON',
+        message: 'Poisoned darts shoot from the wall!'
+    },
+    FALLING_NET: {
+        name: 'Net Trap',
+        damage: 0,
+        effect: 'ENTANGLED',
+        message: 'A net falls from above!'
+    },
+    ROCKFALL: {
+        name: 'Rockfall Trap',
+        damage: 20,
+        damageType: 'physical',
+        message: 'Rocks fall from the ceiling!'
+    },
+    RUST: {
+        name: 'Rust Trap',
+        damage: 0,
+        effect: 'rust',
+        message: 'Rust spreads across your equipment!'
+    },
+    POLYMORPH: {
+        name: 'Polymorph Trap',
+        damage: 0,
+        effect: 'polymorph',
+        message: 'Strange magic warps your form!'
+    },
+    LEVEL_DRAIN: {
+        name: 'Level Drain Trap',
+        damage: 0,
+        effect: 'level_drain',
+        message: 'You feel your experience fading!'
+    },
+    HALLUCINATION: {
+        name: 'Hallucination Trap',
+        damage: 0,
+        effect: 'HALLUCINATING',
+        message: 'Strange visions cloud your mind!'
+    },
+    FEAR: {
+        name: 'Fear Trap',
+        damage: 0,
+        effect: 'FEAR',
+        message: 'Terror grips your heart!'
+    }
+};
+
+// Environmental Hazards
+const HAZARD_TYPES = {
+    LAVA: {
+        name: 'Lava',
+        damage: 25,
+        damageType: 'fire',
+        message: 'The lava burns you!',
+        continuous: true
+    },
+    DEEP_WATER: {
+        name: 'Deep Water',
+        damage: 5,
+        damageType: 'drown',
+        effect: 'SLOWED',
+        message: 'You struggle in deep water!',
+        continuous: true
+    },
+    ACID_POOL: {
+        name: 'Acid Pool',
+        damage: 15,
+        damageType: 'acid',
+        message: 'The acid burns!',
+        continuous: true
+    },
+    TOXIC_GAS: {
+        name: 'Toxic Gas',
+        damage: 3,
+        damageType: 'poison',
+        effect: 'POISON',
+        message: 'Toxic fumes fill your lungs!',
+        continuous: true
+    },
+    FIRE: {
+        name: 'Fire',
+        damage: 10,
+        damageType: 'fire',
+        effect: 'BURNING',
+        message: 'The flames burn you!',
+        continuous: true
+    },
+    ICE: {
+        name: 'Ice',
+        damage: 0,
+        effect: 'slippery',
+        message: 'You slip on the ice!',
+        continuous: false
+    },
+    THORNS: {
+        name: 'Thorns',
+        damage: 5,
+        damageType: 'physical',
+        message: 'Thorns scratch you!',
+        continuous: true
+    },
+    QUICKSAND: {
+        name: 'Quicksand',
+        damage: 0,
+        effect: 'SLOWED',
+        message: 'You sink into quicksand!',
+        continuous: true
+    },
+    STEAM_VENT: {
+        name: 'Steam Vent',
+        damage: 8,
+        damageType: 'fire',
+        message: 'Scalding steam erupts!',
+        continuous: false,
+        periodic: true
+    },
+    ELECTRIC_FLOOR: {
+        name: 'Electric Floor',
+        damage: 12,
+        damageType: 'lightning',
+        message: 'Electricity courses through the floor!',
+        continuous: false,
+        periodic: true
+    },
+    VOID_RIFT: {
+        name: 'Void Rift',
+        damage: 15,
+        damageType: 'dark',
+        effect: 'drain_mana',
+        message: 'The void drains your essence!',
+        continuous: true
+    },
+    HOLY_GROUND: {
+        name: 'Holy Ground',
+        damage: 0,
+        effect: 'heal_undead_damage',
+        message: 'Holy energy radiates from the ground!',
+        healLiving: 2,
+        damageUndead: 10
+    },
+    CURSED_GROUND: {
+        name: 'Cursed Ground',
+        damage: 0,
+        effect: 'WEAKENED',
+        message: 'Dark energy weakens you!',
+        continuous: true
+    },
+    CRYSTAL_SHARD: {
+        name: 'Crystal Shards',
+        damage: 8,
+        damageType: 'magic',
+        message: 'Crystal shards cut you!',
+        continuous: true
     }
 };
 
