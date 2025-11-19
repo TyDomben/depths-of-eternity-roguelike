@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depths of Eternity - Roguelike Dungeon Crawler</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Main Menu -->
+        <div id="main-menu" class="menu-screen">
+            <h1 class="game-title">Depths of Eternity</h1>
+            <div class="menu-buttons">
+                <button id="btn-new-game">New Game</button>
+                <button id="btn-continue" disabled>Continue</button>
+                <button id="btn-daily-challenge">Daily Challenge</button>
+                <button id="btn-endless-mode">Endless Mode</button>
+                <button id="btn-achievements">Achievements</button>
+                <button id="btn-bestiary">Bestiary</button>
+                <button id="btn-settings">Settings</button>
+                <button id="btn-how-to-play">How to Play</button>
+            </div>
+            <div class="meta-stats">
+                <span>Total Runs: <span id="total-runs">0</span></span>
+                <span>Best Depth: <span id="best-depth">0</span></span>
+                <span>Classes Unlocked: <span id="classes-unlocked">3/8</span></span>
+            </div>
+        </div>
+
+        <!-- Class Selection -->
+        <div id="class-selection" class="menu-screen hidden">
+            <h2>Choose Your Class</h2>
+            <div id="class-list"></div>
+            <div id="class-details">
+                <h3 id="class-name">Select a Class</h3>
+                <p id="class-description"></p>
+                <div id="class-stats"></div>
+                <div id="class-abilities"></div>
+            </div>
+            <div class="menu-buttons">
+                <button id="btn-start-run" disabled>Begin Descent</button>
+                <button id="btn-back-to-menu">Back</button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="hidden">
+            <div id="game-ui">
+                <!-- Top Bar -->
+                <div id="top-bar">
+                    <div id="player-info">
+                        <span id="player-class"></span>
+                        <span id="player-level">Lv. 1</span>
+                        <div id="xp-bar"><div id="xp-fill"></div></div>
+                    </div>
+                    <div id="floor-info">
+                        <span id="current-floor">Floor 1</span>
+                        <span id="current-biome"></span>
+                    </div>
+                    <div id="game-time">
+                        <span id="turn-counter">Turn: 0</span>
+                    </div>
+                </div>
+
+                <!-- Main Game Area -->
+                <div id="main-area">
+                    <!-- Left Panel - Stats -->
+                    <div id="left-panel">
+                        <div id="health-display">
+                            <label>HP</label>
+                            <div class="stat-bar health-bar">
+                                <div id="health-fill"></div>
+                                <span id="health-text">100/100</span>
+                            </div>
+                        </div>
+                        <div id="mana-display">
+                            <label>MP</label>
+                            <div class="stat-bar mana-bar">
+                                <div id="mana-fill"></div>
+                                <span id="mana-text">50/50</span>
+                            </div>
+                        </div>
+                        <div id="hunger-display">
+                            <label>Hunger</label>
+                            <div class="stat-bar hunger-bar">
+                                <div id="hunger-fill"></div>
+                                <span id="hunger-text">100/100</span>
+                            </div>
+                        </div>
+                        <div id="status-effects"></div>
+                        <div id="quick-stats">
+                            <div>STR: <span id="stat-str">10</span></div>
+                            <div>DEX: <span id="stat-dex">10</span></div>
+                            <div>INT: <span id="stat-int">10</span></div>
+                            <div>CON: <span id="stat-con">10</span></div>
+                            <div>WIS: <span id="stat-wis">10</span></div>
+                            <div>CHA: <span id="stat-cha">10</span></div>
+                        </div>
+                        <div id="combat-stats">
+                            <div>ATK: <span id="stat-atk">5</span></div>
+                            <div>DEF: <span id="stat-def">5</span></div>
+                            <div>SPD: <span id="stat-spd">100</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Canvas Container -->
+                    <div id="canvas-container">
+                        <canvas id="game-canvas"></canvas>
+                        <div id="minimap-container">
+                            <canvas id="minimap-canvas"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel - Inventory/Abilities -->
+                    <div id="right-panel">
+                        <div class="panel-tabs">
+                            <button class="tab-btn active" data-tab="inventory">Inv</button>
+                            <button class="tab-btn" data-tab="equipment">Equip</button>
+                            <button class="tab-btn" data-tab="skills">Skills</button>
+                        </div>
+                        <div id="inventory-tab" class="tab-content active">
+                            <div id="inventory-grid"></div>
+                            <div id="inventory-weight">Weight: 0/100</div>
+                        </div>
+                        <div id="equipment-tab" class="tab-content hidden">
+                            <div id="equipment-slots">
+                                <div class="equip-slot" data-slot="weapon">Weapon</div>
+                                <div class="equip-slot" data-slot="helm">Helm</div>
+                                <div class="equip-slot" data-slot="armor">Armor</div>
+                                <div class="equip-slot" data-slot="gloves">Gloves</div>
+                                <div class="equip-slot" data-slot="boots">Boots</div>
+                                <div class="equip-slot" data-slot="ring1">Ring</div>
+                                <div class="equip-slot" data-slot="ring2">Ring</div>
+                                <div class="equip-slot" data-slot="amulet">Amulet</div>
+                            </div>
+                        </div>
+                        <div id="skills-tab" class="tab-content hidden">
+                            <div id="skill-list"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Bar - Hotbar & Messages -->
+                <div id="bottom-bar">
+                    <div id="hotbar">
+                        <div class="hotbar-slot" data-slot="1">1</div>
+                        <div class="hotbar-slot" data-slot="2">2</div>
+                        <div class="hotbar-slot" data-slot="3">3</div>
+                        <div class="hotbar-slot" data-slot="4">4</div>
+                        <div class="hotbar-slot" data-slot="5">5</div>
+                        <div class="hotbar-slot" data-slot="6">6</div>
+                        <div class="hotbar-slot" data-slot="7">7</div>
+                        <div class="hotbar-slot" data-slot="8">8</div>
+                        <div class="hotbar-slot" data-slot="9">9</div>
+                        <div class="hotbar-slot" data-slot="0">0</div>
+                    </div>
+                    <div id="message-log">
+                        <div id="messages"></div>
+                    </div>
+                    <div id="action-buttons">
+                        <button id="btn-wait" title="Wait (.)">Wait</button>
+                        <button id="btn-examine" title="Examine (x)">Look</button>
+                        <button id="btn-search" title="Search (s)">Search</button>
+                        <button id="btn-rest" title="Rest (r)">Rest</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modals -->
+        <div id="modal-overlay" class="hidden">
+            <div id="modal-content">
+                <button id="modal-close">&times;</button>
+                <div id="modal-body"></div>
+            </div>
+        </div>
+
+        <!-- Level Up Modal -->
+        <div id="levelup-modal" class="modal hidden">
+            <h2>Level Up!</h2>
+            <p>You reached level <span id="new-level">2</span></p>
+            <div id="stat-choices"></div>
+            <div id="skill-choices"></div>
+            <button id="btn-confirm-levelup">Confirm</button>
+        </div>
+
+        <!-- Death Screen -->
+        <div id="death-screen" class="menu-screen hidden">
+            <h2>You Have Perished</h2>
+            <div id="death-stats">
+                <p>Reached Floor: <span id="death-floor">1</span></p>
+                <p>Level: <span id="death-level">1</span></p>
+                <p>Gold Collected: <span id="death-gold">0</span></p>
+                <p>Enemies Slain: <span id="death-kills">0</span></p>
+                <p>Cause of Death: <span id="death-cause">Unknown</span></p>
+            </div>
+            <div id="unlocks-earned"></div>
+            <div class="menu-buttons">
+                <button id="btn-try-again">Try Again</button>
+                <button id="btn-return-menu">Main Menu</button>
+            </div>
+        </div>
+
+        <!-- Victory Screen -->
+        <div id="victory-screen" class="menu-screen hidden">
+            <h2>Victory!</h2>
+            <p>You have conquered the Depths of Eternity!</p>
+            <div id="victory-stats"></div>
+            <div class="menu-buttons">
+                <button id="btn-new-run">New Run</button>
+                <button id="btn-victory-menu">Main Menu</button>
+            </div>
+        </div>
+
+        <!-- Tooltip -->
+        <div id="tooltip" class="hidden"></div>
+
+        <!-- Context Menu -->
+        <div id="context-menu" class="hidden">
+            <div id="context-menu-items"></div>
+        </div>
+    </div>
+
+    <!-- Game Scripts -->
+    <script src="js/utils/constants.js"></script>
+    <script src="js/utils/helpers.js"></script>
+    <script src="js/utils/rng.js"></script>
+    <script src="js/core/eventbus.js"></script>
+    <script src="js/core/input.js"></script>
+    <script src="js/core/renderer.js"></script>
+    <script src="js/core/audio.js"></script>
+    <script src="js/data/tiles.js"></script>
+    <script src="js/data/items.js"></script>
+    <script src="js/data/enemies.js"></script>
+    <script src="js/data/classes.js"></script>
+    <script src="js/data/skills.js"></script>
+    <script src="js/data/biomes.js"></script>
+    <script src="js/systems/mapgen.js"></script>
+    <script src="js/systems/fov.js"></script>
+    <script src="js/systems/pathfinding.js"></script>
+    <script src="js/systems/combat.js"></script>
+    <script src="js/systems/inventory.js"></script>
+    <script src="js/systems/statuseffects.js"></script>
+    <script src="js/systems/ai.js"></script>
+    <script src="js/entities/entity.js"></script>
+    <script src="js/entities/player.js"></script>
+    <script src="js/entities/enemy.js"></script>
+    <script src="js/entities/item.js"></script>
+    <script src="js/ui/ui.js"></script>
+    <script src="js/ui/menus.js"></script>
+    <script src="js/ui/modals.js"></script>
+    <script src="js/game/state.js"></script>
+    <script src="js/game/save.js"></script>
+    <script src="js/game/meta.js"></script>
+    <script src="js/game/game.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
